@@ -119,6 +119,7 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=0.1, help='initial learning rate')
     parser.add_argument('--T', type=int, default=4, help='timestep')
     parser.add_argument('--tt_mode', type=str, default='PTT', help='[STT / PTT / HTT]')
+    parser.add_argument('--rank_path', type=str, help='checkpoint of TT-ranks')
     args = parser.parse_args()
     torch.cuda.set_device(0)
 
@@ -151,9 +152,9 @@ if __name__ == '__main__':
     if args.tt_mode:
         # to load a pretrained model
         if args.depth == '18':
-            Path = "resnet18-rank-path"
+            Path = args.rank_path
         elif args.depth == '34':
-            Path = "resnet34-rank-path"
+            Path = args.rank_path
         checkpoint = torch.load(Path)
         rank_list = checkpoint['rankList']
         print(len(rank_list),rank_list)

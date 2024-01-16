@@ -1,23 +1,17 @@
 import argparse
-import time
 import torch
 import torch.nn as nn
-import torchvision.transforms as transforms
-from torch.utils.data import DataLoader
+
 from models.MS_ResNet import resnet18, resnet34
 from decompose.decompse_layer import decompose_layer1, decompose_layer2
 
-import torchvision.datasets as datasets
-import numpy as np
-from conf import settings
-from torchstat import stat
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--depth', type=int, required=True, help='network depth')
-    parser.add_argument('--num_epoches', type=int, default=100, help='use gpu or not')
-    parser.add_argument('--decompose_mode', type=str, default='tt', help='batch size for dataloader')
+    parser.add_argument('--save_dir', type=str, required=True, help='save directory for TT-ranks')
+    parser.add_argument('--decompose_mode', type=str, default='tt')
     args = parser.parse_args()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -61,6 +55,6 @@ if __name__ == '__main__':
             {   'model': model,
                 'model_state_dict': model.state_dict(), 
                 'rankList': rank_list
-            }, './checkpoint/resnet20.pth'
+            }, args.save_dir
         )
     print(f"finished {args.decompose_mode} decomposition")
