@@ -1,4 +1,4 @@
-# TT-SNN: Tensor Train Decomposition for Efficient Spiking Neural Network Training
+# TT-SNN: Tensor Train Decomposition for Efficient Spiking Neural Network Training [Paper](https://arxiv.org/pdf/2401.08001.pdf)
 
 Pytorch code for "TT-SNN: Tensor Train Decomposition for Efficient Spiking Neural Network Training" - DATE2024 (Link)
 
